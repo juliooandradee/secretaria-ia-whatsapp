@@ -1,0 +1,22 @@
+{
+  "profissional": "Dra. Ana Souza",
+  "duracaoConsultaMinutos": 30,
+  "antecedenciaMinimaHoras": 2,
+  "horarios": {
+    "segunda": [["08:00", "12:00"], ["14:00", "18:00"]],
+    "terca": [["08:00", "12:00"], ["14:00", "18:00"]],
+    "quarta": [["08:00", "12:00"], ["14:00", "18:00"]],
+    "quinta": [["08:00", "12:00"], ["14:00", "18:00"]],
+    "sexta": [["08:00", "12:00"]],
+    "sabado": [],
+    "domingo": []
+  },
+  "bloqueios": [
+    { "data": "2026-12-25", "motivo": "Natal" },
+    { "data": "2027-01-01", "motivo": "Ano-novo" }
+  ],
+  "mensagens": {
+    "confirmacao": "Olá, {nome}! Aqui é a Clara, da Clínica Exemplo. Passando para confirmar sua consulta {quando} com a {profissional}. Você confirma? Se precisar, eu remarco.",
+    "retorno": "Oi, {nome}! Aqui é a Clara, da Clínica Exemplo. Como você está depois da consulta com a {profissional}? Se precisar de algo, é só me chamar por aqui."
+  }
+}

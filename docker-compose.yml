@@ -1,0 +1,33 @@
+# Secretária sozinha:            docker compose up -d --build
+# Secretária + WAHA (QR code):   docker compose --profile waha up -d --build
+# Nunca use "down -v": apaga os volumes (dados e sessão do WhatsApp).
+services:
+  secretaria:
+    build: .
+    env_file: .env
+    environment:
+      DATA_DIR: /data
+      WAHA_URL: http://waha:3000
+      WAHA_WEBHOOK_URL: http://secretaria:3000/webhooks/waha
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - dados:/data
+    restart: unless-stopped
+
+  waha:
+    image: ${WAHA_IMAGE:-devlikeapro/waha:latest}
+    profiles: ["waha"]
+    environment:
+      WAHA_API_KEY: ${WAHA_API_KEY:?Defina WAHA_API_KEY no .env}
+      WHATSAPP_DEFAULT_ENGINE: WEBJS
+      WAHA_PRINT_QR: "false"
+      WHATSAPP_RESTART_ALL_SESSIONS: "true"
+    volumes:
+      - sessoes:/app/.sessions
+    shm_size: 512mb
+    restart: unless-stopped
+
+volumes:
+  dados:
+  sessoes:

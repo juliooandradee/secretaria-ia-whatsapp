@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Secretária IA · Painel</title>
+  <link rel="icon" href="/painel/icon.svg">
+  <link rel="stylesheet" href="/painel/style.css">
+  <script src="/painel/app.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <img src="/painel/icon.svg" alt="">
+      <div><b>Secretária IA</b><span>Painel ao vivo</span></div>
+    </div>
+    <nav class="tabs" aria-label="Seções">
+      <button type="button" data-tab="conversas">Conversas <span class="count" id="attention-count" hidden></span></button>
+      <button type="button" data-tab="laboratorio">Laboratório</button>
+      <button type="button" data-tab="agenda">Agenda</button>
+      <button type="button" data-tab="aprendizado">Aprendizado <span class="count" id="pending-count" hidden></span></button>
+      <button type="button" data-tab="ajustes">Ajustes</button>
+    </nav>
+    <div class="status">
+      <span class="pill" id="mode-pill"></span>
+      <span class="pill ghost" id="channel-pill"></span>
+      <span class="pill ghost" id="usage-pill"></span>
+    </div>
+  </header>
+  <div class="demo-ribbon" id="demo-ribbon" hidden>Dados de demonstração · pacientes fictícios</div>
+
+  <main>
+    <section class="view conversas" data-view="conversas">
+      <aside class="list">
+        <div class="list-head">
+          <input id="search" type="search" placeholder="Buscar por nome" autocomplete="off">
+          <div class="filters" id="filters">
+            <button type="button" data-filter="all" class="on">Todas</button>
+            <button type="button" data-filter="attention">Atenção</button>
+            <button type="button" data-filter="human">Equipe</button>
+            <button type="button" data-filter="ai">IA</button>
+          </div>
+        </div>
+        <div class="conversation-list" id="conversation-list"></div>
+        <form class="simulator" id="simulator" hidden>
+          <b>Simular paciente</b>
+          <div class="row2">
+            <input name="name" placeholder="Nome" value="Paciente Teste" required>
+            <input name="phone" placeholder="5500999990000" value="5500999990000" required>
+          </div>
+          <div class="row2">
+            <input name="text" placeholder="Mensagem do paciente" required>
+            <button type="submit" class="btn small">Enviar</button>
+          </div>
+        </form>
+      </aside>
+      <article class="chat" id="chat"><div class="empty">Escolha uma conversa</div></article>
+    </section>
+
+    <section class="view lab" data-view="laboratorio">
+      <aside class="scenarios">
+        <div class="note">A IA de verdade, sem enviar nada ao WhatsApp. Consultas marcadas aqui vão para uma agenda de teste.</div>
+        <button type="button" class="btn ghost wide" id="lab-new">Nova conversa de teste</button>
+        <div id="scenario-list"></div>
+      </aside>
+      <article class="chat" id="lab-chat"></article>
+    </section>
+
+    <section class="view agenda" data-view="agenda">
+      <div class="panel-card automations" id="automations"></div>
+      <div id="appointment-list"></div>
+    </section>
+
+    <section class="view learning" data-view="aprendizado">
+      <div class="panel-card intro">
+        <div>
+          <h2>A IA aprende com as conversas</h2>
+          <p>Ela sugere lições a partir do que aconteceu. Só o que você aprovar entra nas instruções dela.</p>
+        </div>
+        <div class="row-actions">
+          <select id="review-days" aria-label="Período">
+            <option value="1">Conversas de hoje</option>
+            <option value="7">Últimos 7 dias</option>
+            <option value="30">Últimos 30 dias</option>
+          </select>
+          <button type="button" class="btn" id="review-button">Revisar com a IA</button>
+        </div>
+      </div>
+      <div class="lessons-grid">
+        <div><h3>Para revisar</h3><div id="pending-lessons"></div></div>
+        <div><h3>Aprovadas (em uso pela IA)</h3><div id="approved-lessons"></div></div>
+      </div>
+    </section>
+
+    <section class="view settings" data-view="ajustes">
+      <form id="settings-form"></form>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status" hidden></div>
+</body>
+</html>
